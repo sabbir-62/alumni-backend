@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const validator = require('validator');
 require('dotenv').config();
 
 
@@ -9,13 +10,47 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please add a name"]
     },
+    studentId: {
+        type: String,
+        required: [true, 'Please add student ID'],
+        unique: true,
+        trim: true,
+        validate: {
+            validator: function (value) {
+                // Check if the value is exactly 7 digits long and consists of numeric characters
+                return /^\d{7}$/.test(value);
+            },
+            message: 'Invalid Student Id',
+        },
+    },
+    department:{
+        type: String,
+        required: [true, "Please add department name"]
+    },
+    passingYear:{
+        type: String,
+        required: [true, "Please add passingYear"],
+        trim: true
+    },
     email: {
         type: String,
-        required: [true, "Please add a email"],
+        required: [true, 'Please add an email'],
         trim: true,
-        lowercase: true
+        lowercase: true,
+        unique: true,
+        validate: {
+            validator: (value) => {
+                return validator.isEmail(value); // Use validator's isEmail method
+            },
+            message: 'Invalid email address',
+        },
     },
     phone: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    company: {
         type: String,
         required: true
     },

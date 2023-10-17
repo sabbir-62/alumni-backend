@@ -8,10 +8,10 @@ require('dotenv').config();
 
 //user registration
 exports.userRegistration = async(req, res) => {
-    const {name, email, phone, role, password, confirmPassword} = req.body;
+    const {name, studentId, department, passingYear, email, phone, company, role, password, confirmPassword} = req.body;
     
     try{
-        if(!name || !email || !phone || !role || !password || !confirmPassword){
+        if(!name || ! studentId || !department || !passingYear || !email || !phone || !company || !role || !password || !confirmPassword){
             return res.status(400).json({
                 success: false,
                 message: "All the fields are required"
@@ -41,8 +41,12 @@ exports.userRegistration = async(req, res) => {
     
         const user = await User.create({
             name,
+            studentId,
+            department,
+            passingYear,
             email,
             phone,
+            company,
             role,
             password,
             confirmPassword
@@ -67,14 +71,14 @@ exports.userRegistration = async(req, res) => {
         if (error.code === 11000 && error.keyPattern && error.keyValue) {
             return res.status(400).json({
                 success: false,
-                message: `User with email '${error.keyValue.email}' already exists.`,
+                message: error
             });
         }
 
         console.error(error);
         return res.status(500).json({
             success: false,
-            message: "Internal server error",
+            message: error.errors.studentId.message,
         });
     }
 }
@@ -149,7 +153,7 @@ exports.userLogin = async (req, res) => {
             });
         } else {
             // Set the cookie with the necessary attributes
-            //res.cookie("hasib", existingUser.token);
+            // res.cookie("hasib", existingUser.token);
 
             return res.status(200).json({
                 data: existingUser.token,
