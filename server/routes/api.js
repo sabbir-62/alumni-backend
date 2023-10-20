@@ -20,3 +20,8 @@ router.post('/create-news', newsController.createNews)
 router.get('/news', newsController.getNews)
 
 module.exports = router;
+
+
+
+
+
