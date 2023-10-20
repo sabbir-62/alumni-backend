@@ -1,5 +1,7 @@
 const News = require('../models/newsModel')
 
+
+/*----------Create News----------*/
 exports.createNews = async(req, res) => {
     const {title, description} = req.body;
 
@@ -40,6 +42,7 @@ exports.createNews = async(req, res) => {
 
 
 
+/*----------Find all news and sent to font-end----------*/
 exports.getNews = async(req, res) => {
     try{
         const news = await News.find()
