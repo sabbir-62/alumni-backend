@@ -202,6 +202,59 @@ exports.about = async(req, res) => {
 }
 
 
+
+/*----------Update User Profile----------*/
+exports.updateProfile = async(req, res) => {
+    const {name, studentId, department, passingYear, email, phone, company, role, token} = req.body;
+
+    try{
+        if(!name || ! studentId || !department || !passingYear || !email || !phone || !company || !role){
+            return res.status(400).json({
+                success: false,
+                message: "All the fields are required"
+            })
+        }
+        
+        const existingUser = await User.findOne({ token });
+
+        if(existingUser){
+            existingUser.name = name;
+            existingUser.studentId = studentId;
+            existingUser.department = department;
+            existingUser.passingYear = passingYear;
+            existingUser.email = email;
+            existingUser.phone = phone;
+            existingUser.company = company;
+            existingUser.role = role;
+
+      // Save the updated user data
+      await existingUser.save();
+            return res.status(200).json({
+                success: true,
+                message: "Profile updated successfully",
+                user: existingUser
+        })
+    }
+    else{
+        return res.status(404).json({
+            success: false,
+            message: "Please login"
+        })
+    }
+    }
+    catch (error) {
+      
+            return res.status(400).json({
+                success: false,
+                message: "Please input valid Student Id and Email"
+            })
+    }
+    
+}
+
+
+
+/*----------Find graduates list and send into frontend----------*/
 exports.graduatesList = async(req, res) => {
     try{
         const graduates = await User.find()

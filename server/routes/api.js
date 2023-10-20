@@ -8,6 +8,9 @@ router.post('/registration', userController.userRegistration);
 router.post('/login', userController.userLogin);
 router.post('/about', userController.about);
 
+// update profile
+router.post('/update-profile', userController.updateProfile);
+
 
 // graduates list
 router.get('/graduates-list', userController.graduatesList)
