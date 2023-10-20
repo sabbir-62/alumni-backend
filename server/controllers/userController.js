@@ -25,10 +25,10 @@ exports.userRegistration = async(req, res) => {
             })
         }
 
-        const findUser = await User.findOne({email});
+        const findUser = await User.findOne({ $or: [{ email }, { studentId }] });
         if(findUser){
             return res.status(400).json({
-                message: "Email is already exist"
+                message: "User already exist"
             })
         }
     
@@ -246,7 +246,7 @@ exports.updateProfile = async(req, res) => {
       
             return res.status(400).json({
                 success: false,
-                message: "Please input valid Student Id and Email"
+                message: "Please input valid Student Id and Email", error
             })
     }
     

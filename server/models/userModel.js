@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
     studentId: {
         type: String,
         required: [true, 'Please add student ID'],
-        unique: true,
         trim: true,
         validate: {
             validator: function (value) {
