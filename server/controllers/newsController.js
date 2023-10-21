@@ -67,3 +67,34 @@ exports.getNews = async(req, res) => {
         });
     }
 }
+
+
+/*----------Delete News----------*/
+exports.deleteNews = async(req, res) => {
+    const title = req.body.title;
+    try{
+        const news = await News.findOne({title})
+
+        const result = await News.deleteOne(news)
+
+        if(result){
+            return res.status(200).json({
+                success: true,
+                message: "Delete Success",
+                news: news
+            })
+        }
+        else{
+            return res.status(404).json({
+                success: false,
+                message: "Nothing"
+            })
+        }
+    }
+    catch (err) {
+        return res.status(404).json({
+            success: false,
+            message: 'Please login'
+        });
+    }
+}

@@ -18,6 +18,7 @@ router.get('/graduates-list', userController.graduatesList)
 //news
 router.post('/create-news', newsController.createNews)
 router.get('/news', newsController.getNews)
+router.post('/delete-news', newsController.deleteNews)
 
 module.exports = router;
 
