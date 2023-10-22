@@ -14,7 +14,7 @@ exports.userRegistration = async(req, res) => {
         if(!name || ! studentId || !department || !passingYear || !email || !phone || !company || !role || !password || !confirmPassword){
             return res.status(400).json({
                 success: false,
-                message: "All the fields are required"
+                message: false
             })
         }
         
@@ -78,7 +78,8 @@ exports.userRegistration = async(req, res) => {
         console.error(error);
         return res.status(500).json({
             success: false,
-            message: error.errors.studentId.message,
+            // message: error.errors.studentId.message,
+            message: error.errors
         });
     }
 }
@@ -149,7 +150,7 @@ exports.userLogin = async (req, res) => {
         if (!matchPassword) {
             return res.status(404).json({
                 success: false,
-                message: 'Something went wrong! Please fill valid email and passwordd'
+                message: 'Login Failed. Please fill valid email and password'
             });
         } else {
             // Set the cookie with the necessary attributes
@@ -164,7 +165,7 @@ exports.userLogin = async (req, res) => {
     } catch (err) {
         res.status(404).json({
             success: false,
-            message: 'Something went wrong! Please fill valid email and password'
+            message: 'Login Failed. Please fill valid email and password'
         });
     }
 };

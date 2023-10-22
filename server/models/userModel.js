@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
                 // Check if the value is exactly 7 digits long and consists of numeric characters
                 return /^\d{7}$/.test(value);
             },
-            message: 'Invalid Student Id',
+            message: 'Invalid Student Id'
         },
     },
     department:{
