@@ -8,6 +8,9 @@ const newsSchema = new mongoose.Schema({
     description:{
         type: String,
         required: [true, "Please Enter Description"]
+    },
+    email:{
+        type: String,
     }
 },{
     timestamps: true,

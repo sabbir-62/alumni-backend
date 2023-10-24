@@ -3,7 +3,7 @@ const News = require('../models/newsModel')
 
 /*----------Create News----------*/
 exports.createNews = async(req, res) => {
-    const {title, description} = req.body;
+    const {title, description, email} = req.body;
 
     try{
         if(!title || !description){
@@ -13,7 +13,7 @@ exports.createNews = async(req, res) => {
             })
         }
         const news = await News.create({
-            title, description
+            title, description,email
         })
 
         if(!news){
