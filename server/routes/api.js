@@ -16,9 +16,10 @@ router.post('/update-profile', userController.updateProfile);
 router.get('/graduates-list', userController.graduatesList)
 
 //news
-router.post('/create-news', newsController.createNews)
-router.get('/news', newsController.getNews)
-router.post('/delete-news', newsController.deleteNews)
+router.post('/create-post', newsController.createNews)
+router.get('/post', newsController.getNews)
+router.post('/delete-post', newsController.deleteNews)
+router.post('/my-post', newsController.myPost)
 
 module.exports = router;
 
