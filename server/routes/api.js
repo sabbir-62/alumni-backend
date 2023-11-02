@@ -22,8 +22,3 @@ router.post('/delete-post', newsController.deleteNews)
 router.post('/my-post', newsController.myPost)
 
 module.exports = router;
-
-
-
-
-
